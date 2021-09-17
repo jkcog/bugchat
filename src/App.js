@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import CommunicationZone from './CommunicationZone';
+import CommunicationZone from './Components/CommunicationZone';
+import Sidebar from './Components/Sidebar';
 
 function App() {
   return (

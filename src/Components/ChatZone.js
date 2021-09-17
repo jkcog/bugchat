@@ -1,6 +1,6 @@
 import React from 'react';
 import Snippet from './Snippet';
-import './App.css';
+import '../App.css';
 
 export default function ChatZone(props) {
   const history = props.chatItem;
