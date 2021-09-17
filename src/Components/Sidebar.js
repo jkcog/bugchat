@@ -1,5 +1,5 @@
-import React from 'react';
-import { makeStyles, Typography } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { Input, makeStyles, TextField, Typography } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 import { Avatar } from '@material-ui/core';
 import List from '@material-ui/core/List';
@@ -39,6 +39,26 @@ export default function Sidebar({
   contacts,
 }) {
   const classes = useStyles();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredContacts, setFilteredContacts] = useState(contacts);
+
+  useEffect(() => {
+    if (searchTerm.length > 0) {
+      console.log(contacts);
+      let newContacts = contacts.filter((contact) => {
+        // return contact.name.localeCompare(searchTerm) == 0;
+        return contact.name.includes(searchTerm);
+      });
+      setFilteredContacts(newContacts);
+    } else if (searchTerm.length == 0) {
+      setFilteredContacts(contacts);
+    }
+  }, [searchTerm.length]);
+
+  function handleChange(e) {
+    setSearchTerm(e.target.value);
+    console.log(e.target.value);
+  }
 
   return (
     <div className={classes.root}>
@@ -52,10 +72,11 @@ export default function Sidebar({
           <Typography variant="h5" className={classes.title}>
             All Ducks
           </Typography>
+          <TextField onChange={handleChange}></TextField>
         </div>
 
         <List>
-          {contacts.map((item) => (
+          {filteredContacts.map((item) => (
             <ListItem
               button
               key={item.name}

@@ -43,13 +43,12 @@ const CommunicationZone = () => {
   }
 
   function handleSubmit(event) {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' || event.type === 'click') {
       const newState = {
         ...state,
         value: '',
-        disposable: event.target.value,
-        name: currentContact,
-        history: [...state.history, event.target.value],
+        disposable: state.value,
+        history: [...state.history, state.value],
       };
       setState(newState);
       stateRef.current = newState;
